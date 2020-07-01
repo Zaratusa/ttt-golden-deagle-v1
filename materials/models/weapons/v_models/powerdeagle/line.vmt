@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/v_models/powerdeagle/line"
+	"$additive" 1
+}

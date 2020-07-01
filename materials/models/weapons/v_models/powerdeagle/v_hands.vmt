@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/v_models/powerdeagle/v_hands"
+	"$bumpmap" "models/weapons/v_models/powerdeagle/v_hands_normal"
+	"$phong" 1
+	"$phongexponent" 8
+	"$phongboost" 0.215
+	"$phongfresnelranges" "[0.5 2 4]"
+	"$phongalbedotint" 1
+}

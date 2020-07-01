@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "models/weapons/v_models/powerdeagle/dot2"
+	"$additive" 1
+}
