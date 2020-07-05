@@ -6,7 +6,7 @@ SWEP.Contact = "http://steamcommunity.com/profiles/76561198032479768"
 -- contact "http://steamcommunity.com/profiles/76561198049831089"
 
 -- ConVars
-CreateConVar("ttt_golden_deag_kill_non_traitors", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY}) -- Should the deag be able to kill non-traitors?
+CreateConVar("ttt_golden_deag_kill_non_traitors", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY}) -- Should the deag be able to kill non-traitors?
 CreateConVar("ttt_golden_deag_suicide_non_traitors", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY}) -- Should the deag kill the shooter, if their target is not a traitor and not on their team
 
 if SERVER then
