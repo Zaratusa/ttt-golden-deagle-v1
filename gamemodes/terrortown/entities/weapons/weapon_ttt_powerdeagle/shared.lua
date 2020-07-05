@@ -5,6 +5,10 @@ SWEP.Contact = "http://steamcommunity.com/profiles/76561198032479768"
 -- team fixes "Alf21"
 -- contact "http://steamcommunity.com/profiles/76561198049831089"
 
+-- ConVars
+CreateConVar("ttt_golden_deag_kill_non_traitors", 1, {FCVAR_ARCHIVE, FCVAR_NOTIFY}) -- Should the deag be able to kill non-traitors?
+CreateConVar("ttt_golden_deag_suicide_non_traitors", 0, {FCVAR_ARCHIVE, FCVAR_NOTIFY}) -- Should the deag kill the shooter, if their target is not a traitor and not on their team
+
 if SERVER then
 	AddCSLuaFile()
 	resource.AddWorkshop("253737047")
@@ -168,16 +172,24 @@ function SWEP:PrimaryAttack()
 			sound.Play(self.Primary.Sound, self:GetPos())
 			self.shotsFired = self.shotsFired + 1
 
+			-- if TTT2 then
+			-- 	local TTT2Mode = GetConVar("ttt_golden_deagle_ttt2_mode"):GetInt()
+			-- else
+			-- 	local TTT2Mode = 0
+			-- end
+
+			-- local TTT2Mode = GetConVar("ttt_golden_deagle_ttt2_mode"):GetInt()
+
 			local title = "HandleGoldenDeagle" .. self:EntIndex() .. self.shotsFired
 
 			hook.Add("EntityTakeDamage", title, function(ent, dmginfo)
 				if (IsValid(ent) and ent:IsPlayer() and dmginfo:IsBulletDamage() and dmginfo:GetAttacker():GetActiveWeapon() == self) then
-					if (IsInTraitorTeam(ent)) then
+					if (IsInTraitorTeam(ent)) or (not AreTeamMates(owner,ent) and GetConVar("ttt_golden_deag_kill_non_traitors"):GetBool()) then
 						hook.Remove("EntityTakeDamage", title) -- remove hook before applying new damage
 						dmginfo:ScaleDamage(270) -- deals 9990 damage
 
 						return false -- one hit the traitor
-					elseif (AreTeamMates(owner, ent)) then
+					elseif (AreTeamMates(owner, ent)) or (GetConVar("ttt_golden_deag_suicide_non_traitors"):GetBool()) then
 						local newdmg = DamageInfo()
 						newdmg:SetDamage(9990)
 						newdmg:SetAttacker(owner)
